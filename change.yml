@@ -1,0 +1,29 @@
+---
+  - name: "Orchestration Example"
+    hosts: logicservers
+    serial: 1
+
+    tasks:
+
+    - name: "Install nginx"
+      debug:
+        msg: "Install nginx on {{ inventory_hostname }}"
+
+    - name: "Upgrade nginx"
+      debug:
+        msg: "Updrade nginx on {{ inventory_hostname }}"
+
+    - name: "Configure nginx"
+      debug:
+          msg: "Start {{ inventory_hostname }}"
+      notify: restart nginx #if there is something to configure, notify handler to restart nginx
+      changed_when: True    # dto inform the change occured and trigger the handler
+
+    - name: "Verify nginx"
+      debug:
+        msg: "Verify {{ inventory_hostname }}"
+
+    handlers:
+    - name: restart nginx
+      debug:
+        msg: "CALLED HANDLER FOR RESTART"

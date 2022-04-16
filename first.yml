@@ -1,0 +1,13 @@
+---
+  - name: "My first play"
+    hosts: localhost
+
+    tasks:
+
+      - name: "test reacheability"
+        ping:
+
+      - name: "display files of the current folder"
+        find:
+          path: ~/ansible-training-course/challenge-1
+          file_type: file
